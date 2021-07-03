@@ -1,13 +1,105 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+* {
+  box-sizing: border-box;
+}
+p {
+  padding: 0;
+  margin: 0;
+}
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+:root {
+  --light-color: #f6b6ce;
+  --primary-color: #ff55a5;
+  --secondary-color: #ff5860;
+  --dark-color: #8c054a;
+}
+
+.button-primary {
+  background-image: linear-gradient(
+    90deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  box-sizing: border-box;
+  color: #fff;
+  text-align: center;
+  line-height: 30px;
+  font-weight: 550;
+  height: 30px;
+  display: inline-block;
+  border-radius: 3px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  vertical-align: middle;
+  transition: all 1s;
+}
+
+.button-primary.disabled {
+  pointer-events: none;
+  background-color: #afafaf;
+  background-image: none;
+}
+
+.button-primary:hover {
+  /* color: black; */
+  background-image: linear-gradient(
+    to left bottom,
+    var(--primary-color) 40%,
+    var(--secondary-color) 100%
+  );
+  box-shadow: 0 0 20px 0 rgb(255 88 96 / 50%);
+}
+
+.button-big {
+  width: 120px;
+  height: 40px;
+  font-size: 18px;
+}
+
+.button-full {
+  width: 100%;
+  height: 40px;
+  font-size: 18px;
+}
+
+h3.active {
+  color: var(--primary-color);
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.break-line {
+  height: 1.5px;
+  width: 100%;
+  background-image: linear-gradient(90deg, #ff55a5, #ff5860);
+  box-shadow: 0 0 20px 0 rgb(255, 88, 96, 0.5);
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: gray;
+  border-radius: 10px;
 }

@@ -1,0 +1,76 @@
+.ung-dung {
+  // margin-top: 50px;
+  background-attachment: fixed;
+  padding: 100px;
+  .ung-dung__text {
+    padding-right: 30px;
+    color: #ffffffcc;
+    align-self: center;
+  }
+  .text-u-left {
+    color: white;
+    font-weight: 700;
+    font-size: 35px;
+    padding: 5px 0;
+  }
+  p {
+    font-size: 18px;
+    padding: 0;
+  }
+  button {
+  }
+  .ung-dung__dt {
+    .ung-dung__img {
+      width: 45%;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      img.img-dt {
+        z-index: 500;
+        overflow: hidden;
+      }
+      .ung-dung__carousel {
+        position: absolute;
+        width: 88%;
+        left: 6%;
+        top: 2%;
+        img {
+          border-radius: 7px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and(max-width: 1000px) {
+  .ung-dung {
+    padding: 50px;
+    text-align: center;
+    .ung-dung__text {
+      padding: 0;
+      .text-u-left {
+        padding: 0;
+      }
+    }
+    .ung-dung__dt {
+      margin-top: 20px;
+    }
+  }
+}
+
+@media screen and(max-width: 450px) {
+  .ung-dung {
+    padding: 50px;
+    text-align: center;
+    .ung-dung__text {
+      padding: 0;
+      .text-u-left {
+        font-size: 18px;
+        padding: 0;
+      }
+    }
+    .ung-dung__dt {
+      display: none;
+    }
+  }
+}

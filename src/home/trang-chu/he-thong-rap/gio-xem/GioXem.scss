@@ -1,0 +1,33 @@
+.suatChieu__content {
+  padding: 3px 10px;
+  text-align: center;
+  background-color: transparent;
+  //   float: left;
+  border-radius: 7px;
+  border: 1px solid #e4e4e4;
+  font-weight: 500;
+  margin: 0 15px 15px 0;
+  transition: all 0.5s;
+  width: 110px;
+  & span:first-child {
+    color: var(--primary-color);
+    font-size: 15px;
+  }
+  & span:last-child {
+    color: white;
+    font-size: 12px;
+  }
+  &:hover {
+    border-color: var(--primary-color);
+  }
+}
+
+@media screen and(max-width: 450px) {
+  .suatChieu__content {
+    border: 1px solid var(--primary-color);
+    span:last-child {
+      color: #0000008a;
+      font-size: 12px;
+    }
+  }
+}

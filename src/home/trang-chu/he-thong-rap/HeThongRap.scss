@@ -1,0 +1,100 @@
+.cover {
+  background-color: #28282d;
+  padding-bottom: 50px;
+}
+.rap__title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.rap__content {
+  position: relative;
+  .rap__logo {
+    width: 70%;
+    margin: 20px auto;
+    .rap__item {
+      list-style: none;
+      opacity: 0.5;
+      transition: all 0.3s;
+      padding: 20px;
+      .bg-item {
+        cursor: pointer;
+      }
+      p,
+      i {
+        display: none;
+      }
+      &.active {
+        opacity: 1;
+      }
+      &:hover {
+        opacity: 1;
+      }
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .rap__content {
+    .rap__logo {
+      width: 70%;
+      .rap__item {
+        padding: 10px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .rap__content {
+    .rap__logo {
+      width: 100%;
+      display: block;
+      .rap__item {
+        display: flex;
+        width: 100%;
+        opacity: 1;
+        border-bottom: 0.5px solid var(--dark-color);
+        background-color: white;
+        .bg-item {
+          width: 100%;
+          .img-logo {
+            position: relative;
+            padding-bottom: 10px;
+            cursor: pointer;
+            img {
+              width: 15%;
+              margin: 0 0 0 10px;
+            }
+            & p,
+            i {
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+              display: block;
+              font-weight: 500;
+              color: black;
+            }
+            & p {
+              left: 35%;
+            }
+            & i {
+              right: 10%;
+            }
+          }
+        }
+      }
+    }
+    .lichPhim .lich-phim__item .lich-phim__content {
+      .tenPhim {
+        color: #ff55a5;
+      }
+      .thoiLuong {
+        color: #0000008a !important;
+        font-size: 12px;
+      }
+    }
+  }
+}

@@ -1,0 +1,90 @@
+$height: 620px;
+.lich-chieu {
+  margin-top: 10px;
+  padding-top: 20px;
+  //   border-top: 1px solid rgba(0, 0, 0, 0.692);
+  .lich-chieu__content {
+    padding: 0;
+    .lich-chieu__rap {
+      max-height: $height;
+      overflow: auto;
+
+      li.lich-chieu__item {
+        cursor: pointer;
+        list-style: none;
+        transition: all 0.5s;
+        opacity: 0.5;
+        border-bottom: 1px solid rgba(148, 148, 148, 0.418);
+
+        &.active {
+          opacity: 1;
+          transition: all 0.5s;
+        }
+
+        // Item, logo cụm rạp
+        img {
+          width: 15%;
+          height: 100%;
+        }
+        .item__title {
+          margin-top: 7px;
+          margin-left: 10px;
+          .tenRap {
+            font-weight: 500;
+            font-size: 15px;
+          }
+          span {
+            font-weight: bold;
+            font-size: 16px;
+          }
+          .dsRap-diaChi {
+          }
+        }
+      }
+    }
+  }
+  .lich-chieu__phim {
+    height: $height;
+    overflow: auto;
+    padding-left: 50px;
+    margin: 0 auto;
+  }
+  .line {
+    border-right: dashed 2px #dee2e6;
+    position: absolute;
+    height: ($height - 30px);
+    width: 2px;
+    top: 0;
+    right: 5px;
+    z-index: -1;
+  }
+}
+
+@media screen and(max-width: 450px) {
+  .lich-chieu {
+    color: black;
+    border-top: none;
+    padding-top: 0;
+    .lich-chieu__content {
+      width: 90%;
+      margin: 0 auto;
+      border-top: 1px solid var(--primary-color);
+      .lich-chieu__rap {
+        height: $height/2 !important;
+        width: 100%;
+        margin: 5px auto;
+        padding: 0;
+        padding-left: 15px;
+        li.lich-chieu__item {
+          opacity: 1;
+          .item__title {
+            .dsRap-diaChi {
+              color: black;
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+}

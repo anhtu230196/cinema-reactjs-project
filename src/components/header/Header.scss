@@ -1,0 +1,125 @@
+.header {
+  position: fixed;
+  top: 0%;
+  z-index: 200;
+  width: 100%;
+  background-color: hsla(211, 30%, 19%, 0.7);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  transition: 0.5s all;
+  padding: 0 10%;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &:hover {
+    background-color: #22303f;
+  }
+  .navbar {
+    // flex-direction: column;
+    // justify-content: space-evenly;
+    min-width: 100%;
+    .navbar-brand {
+      margin: 0 auto;
+    }
+    .navbar-toggler--config {
+      position: absolute;
+      left: -40px;
+      top: 10px;
+    }
+  }
+  a {
+    cursor: pointer;
+    color: white;
+    transition: all 0.5s;
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+  i {
+    color: white;
+  }
+}
+
+.navbar__right {
+  position: absolute;
+  right: 5%;
+  .helloUser {
+    .UserName {
+      align-self: center;
+      padding-left: 5px;
+    }
+    .UserInfo {
+      cursor: pointer;
+      position: absolute;
+      top: 75%;
+      left: -89%;
+      transition: all 1s;
+      overflow: hidden;
+      color: #000;
+      text-align: center;
+      width: 250px;
+      height: 0;
+      &::before {
+        content: "";
+        position: absolute;
+        top: 10%;
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid white;
+      }
+      .arrow-up {
+        height: 16px;
+        img {
+          width: 15px;
+          height: 10px;
+        }
+      }
+      .UserInfo__content {
+        background-image: linear-gradient(180deg, #fff, #d4d4d4);
+        border: 1.5px solid hsla(0, 0%, 63.9%, 0.781);
+        width: 100%;
+        box-shadow: 1px 1px 7px 2px rgba(0, 0, 0, 18%);
+        .inFo,
+        .logOut {
+          padding: 10px 0;
+          border-bottom: 1.5px solid hsla(0, 0%, 63.9%, 0.781);
+          transition: all 0.2s;
+          &:hover {
+            background-color: var(--light-color);
+            border-left: 5px solid var(--primary-color);
+            font-weight: 550;
+            color: white;
+          }
+        }
+      }
+    }
+    &:hover .UserInfo {
+      height: auto;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .navbar__right {
+    .helloUser {
+      .UserInfo {
+        width: 205px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  header {
+    // max-width: calc(100% - 13px);
+  }
+  .navbar {
+    flex-direction: column;
+  }
+
+  .register-destop {
+    display: none;
+  }
+}

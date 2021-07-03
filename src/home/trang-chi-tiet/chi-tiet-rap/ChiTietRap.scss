@@ -1,0 +1,149 @@
+.cover {
+  width: 100%;
+}
+.rap__logo {
+  max-width: 960px;
+  margin: 0 auto !important;
+  padding-bottom: 20px;
+  .rap-logo__item {
+    opacity: 0.5;
+    transition: all 0.5s;
+    cursor: pointer;
+    img {
+      width: 90px;
+      height: 90px;
+    }
+    &:hover,
+    &.active {
+      opacity: 1;
+    }
+  }
+}
+.lich-chieu__rap {
+  list-style: none;
+  max-height: 450px;
+}
+.lich-chieu__item {
+  opacity: 0.5;
+  border-bottom: 1px solid hsla(0, 0%, 58%, 0.418);
+  cursor: pointer;
+  &.active {
+    opacity: 1;
+  }
+  img {
+    width: 15%;
+    height: 100%;
+  }
+  .item__title {
+    margin-left: 10px;
+    align-self: center;
+    span {
+      font-weight: 700;
+    }
+  }
+}
+.lichPhim {
+  padding-left: 0;
+  cursor: pointer;
+  list-style: none;
+  .lich-phim__item {
+    .lich-phim__ngayXem {
+      width: 95%;
+      overflow: auto;
+      white-space: nowrap;
+      .ngay-xem-item {
+        padding: 10px 50px;
+        font-size: 21px;
+        cursor: pointer;
+        text-align: center;
+        &.active {
+          color: var(--primary-color);
+        }
+      }
+    }
+    .lich-phim__content {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      img {
+        width: 90px !important;
+        height: 120px !important;
+      }
+      .tenPhim {
+        font-weight: 700;
+        font-size: 22px;
+        line-height: 18px;
+        color: lightgray;
+      }
+      .thoiGian {
+        margin-top: 10px;
+      }
+    }
+    .button-datVe {
+      border: 1px solid whitesmoke;
+      background: transparent;
+      font-size: 22px;
+      font-weight: 550;
+      padding: 3px 15px;
+      color: var(--primary-color);
+      transition: all 0.5s;
+      border-radius: 7px;
+      margin: 0 15px 15px 0;
+      &:hover {
+        color: var(--primary-color);
+        border-color: var(--primary-color);
+      }
+    }
+  }
+}
+.rap-lichChieu {
+  margin-top: 40px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: flex;
+  justify-content: center;
+  max-width: 1500px;
+}
+.lich-chieu__phim {
+}
+
+@media screen and (max-width: 1000px) {
+  .rap-lichChieu {
+    .lichPhim {
+      border-top: none;
+      padding: 0;
+      .lich-phim__item {
+        .lich-phim__ngayXem {
+          .ngay-xem-item {
+            padding: 0px 50px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .rap__logo {
+    .rap-logo__item {
+      img {
+        width: 60px;
+        height: 60px;
+      }
+    }
+  }
+  .rap-lichChieu {
+    margin-top: 10px !important;
+  }
+  .lich-chieu__phim {
+    .lichPhim {
+      padding: 0 5px;
+      .lich-phim__item {
+        .gioXem {
+          .button-datVe {
+            padding: 3 15px !important;
+          }
+        }
+      }
+    }
+  }
+}

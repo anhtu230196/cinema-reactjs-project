@@ -1,0 +1,33 @@
+.slick-prev,
+.slick-next {
+  position: absolute;
+  display: block;
+  height: 20px;
+  width: 20px;
+  line-height: 0px;
+  font-size: 0px;
+  cursor: pointer;
+  background: transparent;
+  color: transparent;
+  top: 40% !important;
+  transform: translate(0, -50%);
+  padding: 0;
+  border: none;
+  outline: none;
+}
+.slick-prev {
+  left: -10px !important;
+}
+
+.slick-next {
+  right: -10px !important;
+}
+.slick-prev:hover,
+.slick-next:hover {
+  outline: none;
+  color: color;
+  background-color: transparent;
+  &::before {
+    color: var(--primary-color);
+  }
+}

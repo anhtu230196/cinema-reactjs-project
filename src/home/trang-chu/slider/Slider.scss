@@ -1,0 +1,35 @@
+.covers {
+  position: relative;
+  .iconPlay {
+    cursor: pointer;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all 0.8s;
+  }
+  &:hover .iconPlay {
+    opacity: 0.5;
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}
+
+.slider-left div,
+.slider-right div {
+  margin-top: 0px !important;
+}
+
+@media screen and (max-width: 800px) {
+  .covers {
+    .iconPlay {
+      width: 40px;
+      height: 40px;
+      opacity: 0.8;
+    }
+  }
+}

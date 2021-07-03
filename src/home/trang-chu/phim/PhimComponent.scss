@@ -1,0 +1,20 @@
+h3 {
+  font-size: 20px !important;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.3s;
+  &:hover {
+    font-size: 25px !important;
+    font-weight: bold;
+    color: white;
+  }
+  &.active {
+    font-size: 25px !important;
+    font-weight: bold;
+    color: var(--primary-color);
+  }
+}
+
+.cover {
+  background-color: #2b2b31;
+}
