@@ -12,8 +12,8 @@ class ModalDangNhap extends Component {
   state = {
     open: false,
     info: {
-      taiKhoan: "",
-      matKhau: "",
+      taiKhoan: "123456789",
+      matKhau: "123123",
     },
   };
 

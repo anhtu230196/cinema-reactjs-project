@@ -31,12 +31,12 @@ export const layThongTinLichChieuTheoHeThong = (maHeThongRap) => (dispatch) => {
     );
 };
 
+// Mobile
 export const layTatCaThongTinLichChieuTheoHeThong =
   (listMaHeThong) => async (dispatch) => {
     const res = await api.get(
       `/QuanLyRap/LayThongTinLichChieuHeThongRap?maHeThongRap=${listMaHeThong}&maNhom=GP05`
     );
-    // console.log(arrayRes);
     dispatch({
       type: LAYDANHSACHRAPVAPHIMLICHCHIEUMOBILE,
       payload: res.data[0],

@@ -7,33 +7,72 @@ import "./ChiTietRap.scss";
 function ChiTietRap({ heThongRapChieu, hinhAnh, tenPhim }) {
   const [heThongActive, setHeThongActive] = useState("BHDStar");
   const [cumRapChieu, setCumRapChieu] = useState({});
+  const [logoRap, setLogoRap] = useState("");
   const [rapActiveIndex, setRapActiveIndex] = useState(0);
-  const [listLichChieu, setListLichChieu] = useState([]);
   const [listNgayChieu, setListNgayChieu] = useState([]);
+  const [ngayActiveIndex, setNgayActiveIndex] = useState(0);
+  const [listLichChieu, setListLichChieu] = useState([]);
 
+  // Khi component mở
   useEffect(() => {
-    // KHi đổi Hệ Thống, set Rạp active về vị trí ban đầu
-    setRapActiveIndex(0);
-    // cumRapShow: {cumRapChieu: [], logo: String}
-    let cumRapShow = heThongRapChieu?.find(
-      (heThong) => heThong.maHeThongRap === heThongActive
+    if (heThongRapChieu) {
+      handleChangeHeThong(heThongActive);
+    }
+  }, [heThongRapChieu, cumRapChieu]);
+
+  // Thay đổi Hệ Thống Rạp, maHeThong: CGV, Galaxy...
+  const handleChangeHeThong = (maHeThong) => {
+    // Active Hệ Thống đc chọn
+    setHeThongActive(maHeThong);
+    // Lọc Hệ Thống đc chọn trong list heThongRapChieu đc truyền vào
+    const heThongChieu = heThongRapChieu.find(
+      (heThong) => heThong.maHeThongRap === maHeThong
     );
-    setCumRapChieu(cumRapShow);
-  }, [heThongActive, heThongRapChieu]);
+    setLogoRap(heThongChieu.logo);
+    setCumRapChieu(heThongChieu.cumRapChieu);
+    // Mỗi lần thay đổi hệ thống => active lại rạp đầu tiên, set lại mảng ngày Chiếu
+    handleChangeRap(0);
+  };
 
-  // console.log(cumRapChieu?.cumRapChieu && cumRapChieu.cumRapChieu[0]);
+  // Thay Đổi Rạp
+  const handleChangeRap = (index) => {
+    setRapActiveIndex(index);
+    if (cumRapChieu.length > 0) {
+      // console.log(cumRapChieu[index]);
+      // Rút gọn Array lại thành mảng ngayChieuGioChieu
+      let danhSachNgayChieu = cumRapChieu[index].lichChieuPhim.map(
+        (lichChieu) => lichChieu.ngayChieuGioChieu.split("T")[0]
+      );
+      // Xóa các ngày chiếu bị trùng
+      const listUniqNgayChieu = danhSachNgayChieu
+        .filter((ngay, pos) => danhSachNgayChieu.indexOf(ngay) === pos)
+        .sort((a, b) => (a > b ? 1 : -1)); // a > b => đổi chỗ
+      setListNgayChieu(listUniqNgayChieu);
+      handleChangeNgayChieu(listUniqNgayChieu[0], 0, index);
+    }
+  };
 
-  useEffect(() => {
-    // cumRapChieu?.cumRapChieu[0]
-    let lichChieuShow =
-      cumRapChieu?.cumRapChieu && cumRapChieu.cumRapChieu[rapActiveIndex];
-    setListLichChieu(lichChieuShow?.lichChieuPhim);
-    console.log(lichChieuShow?.lichChieuPhim);
-    const listNgay = [];
-    // console.log(listNgay);
-  }, [rapActiveIndex, cumRapChieu]);
+  // Thay đổi Ngày Chiếu ---- ngay: 2020-09-23...
+  const handleChangeNgayChieu = (
+    ngay,
+    ngayIndex,
+    rapIndex = rapActiveIndex
+  ) => {
+    setNgayActiveIndex(ngayIndex);
+    // console.log(cumRapChieu[rapActiveIndex].lichChieuPhim);
+    // console.log("rapIndex: ", rapIndex);
 
-  // console.log(listLichChieu);
+    //  lấy lại toàn bộ form array lichChieuPhim
+    const listLichChieuTheoNgay = cumRapChieu[rapIndex].lichChieuPhim.filter(
+      (item) => item.ngayChieuGioChieu.split("T")[0] === ngay
+    );
+    setListLichChieu(listLichChieuTheoNgay);
+  };
+
+  // Click nút giờ, chạy hàm đặt vé
+  const handleDatVe = (maLichChieu) => {
+    console.log(maLichChieu);
+  };
 
   return (
     <div className='container-fluid'>
@@ -45,7 +84,7 @@ function ChiTietRap({ heThongRapChieu, hinhAnh, tenPhim }) {
             className={`rap-logo__item col-lg-2 col-md-4 col-4 p-lg-1 pt-md-4 pt-4 text-center ${
               heThong.maHeThongRap === heThongActive && "active"
             }`}
-            onClick={() => setHeThongActive(heThong.maHeThongRap)}
+            onClick={() => handleChangeHeThong(heThong.maHeThongRap)}
             key={index}>
             <img src={heThong.logo} alt='' />
           </div>
@@ -57,17 +96,15 @@ function ChiTietRap({ heThongRapChieu, hinhAnh, tenPhim }) {
         <div className='col-12 col-md-6 col-lg-4'>
           {/* Danh sách Rạp */}
           <ul className='lich-chieu__rap'>
-            {cumRapChieu &&
-              cumRapChieu.cumRapChieu?.map((rap, key) => (
+            {cumRapChieu.length &&
+              cumRapChieu.map((rap, key) => (
                 <li
                   key={key}
                   className={`lich-chieu__item py-2 ${
                     key === rapActiveIndex && "active"
                   }`}>
-                  <div
-                    className='d-flex'
-                    onClick={() => setRapActiveIndex(key)}>
-                    <img src={cumRapChieu?.logo} alt='' />
+                  <div className='d-flex' onClick={() => handleChangeRap(key)}>
+                    <img src={logoRap} alt='' />
                     <div className='item__title ml-2'>
                       <span
                         className='tenRap'
@@ -91,13 +128,15 @@ function ChiTietRap({ heThongRapChieu, hinhAnh, tenPhim }) {
             <li className='lich-phim__item'>
               <div className='lich-phim__ngayXem d-flex'>
                 {/* List Ngày */}
-                {listLichChieu?.map((lichChieu, key) => (
+                {listNgayChieu?.map((ngayChieu, key) => (
                   <div
                     key={key}
-                    className={`ngay-xem-item ${key === 0 && "active"}`}>
-                    <span>
+                    className={`ngay-xem-item ${
+                      key === ngayActiveIndex && "active"
+                    }`}>
+                    <span onClick={() => handleChangeNgayChieu(ngayChieu, key)}>
                       {/* {moment(lichChieu.ngayChieuGioChieu).format("DD/MM")} */}
-                      {lichChieu.ngayChieuGioChieu}
+                      {moment(ngayChieu).format("DD/MM")}
                     </span>
                   </div>
                 ))}
@@ -111,9 +150,12 @@ function ChiTietRap({ heThongRapChieu, hinhAnh, tenPhim }) {
               </div>
               {/* List Giờ */}
               <div className='gioXem'>
-                {[...Array(7).keys()].map((key) => (
-                  <button key={key} className='button-datVe'>
-                    22:00
+                {listLichChieu.map((lichChieu, key) => (
+                  <button
+                    key={key}
+                    className='button-datVe'
+                    onClick={() => handleDatVe(lichChieu.maLichChieu)}>
+                    {moment(lichChieu.ngayChieuGioChieu).format("HH:mm")}
                   </button>
                 ))}
               </div>

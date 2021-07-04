@@ -9,6 +9,7 @@ import TrangThongTinNguoiDung from "./home/trang-thong-tin-nguoi-dung/TrangThong
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "./redux/actions/userAction";
+import PrivateRoute from "./HOCs/PrivateRoute";
 
 const theme = createMuiTheme({
   palette: {
@@ -35,7 +36,7 @@ function App() {
         <Switch>
           <Route path='/' exact component={TrangChu} />
           <Route path='/chitiet/:maPhim' component={TrangChiTiet} />
-          <Route path='/datve/:id' component={TrangDatGhe} />
+          <PrivateRoute path='/datve/:maLichChieu' component={TrangDatGhe} />
           <Route path='/dangky' component={TrangDangKy} />
           <Route path='/thongtin' component={TrangThongTinNguoiDung} />
         </Switch>

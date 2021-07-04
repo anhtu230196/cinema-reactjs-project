@@ -6,9 +6,9 @@ function HomeLayout({ children, hideDangNhap }) {
   return (
     <div
       style={{
-        // backgroundColor: "#2b2b31",
-        backgroundColor: "#28282d",
-        backgroundImage: "linear-gradient(180deg, #00000000 0%, #2c3e50 74%)",
+        backgroundColor: "#2b2b31",
+        // backgroundColor: "#212529",
+        // backgroundImage: "linear-gradient(180deg, #00000000 0%, #2c3e50 74%)",
         minHeight: "100%",
         color: "white",
       }}>

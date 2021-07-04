@@ -3,17 +3,15 @@
   top: 0%;
   z-index: 200;
   width: 100%;
-  background-color: hsla(211, 30%, 19%, 0.7);
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  background-color: #2b2b31;
+  box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.3);
   transition: 0.5s all;
   padding: 0 10%;
   color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  &:hover {
-    background-color: #22303f;
-  }
+
   .navbar {
     // flex-direction: column;
     // justify-content: space-evenly;
