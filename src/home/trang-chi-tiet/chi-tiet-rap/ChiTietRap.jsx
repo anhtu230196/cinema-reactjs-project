@@ -1,17 +1,19 @@
 import moment from "moment";
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { getColorCinema } from "../../../helpers";
 
 import "./ChiTietRap.scss";
 
 function ChiTietRap({ heThongRapChieu, hinhAnh, tenPhim }) {
   const [heThongActive, setHeThongActive] = useState("BHDStar");
-  const [cumRapChieu, setCumRapChieu] = useState({});
+  const [cumRapChieu, setCumRapChieu] = useState([]);
   const [logoRap, setLogoRap] = useState("");
   const [rapActiveIndex, setRapActiveIndex] = useState(0);
   const [listNgayChieu, setListNgayChieu] = useState([]);
   const [ngayActiveIndex, setNgayActiveIndex] = useState(0);
   const [listLichChieu, setListLichChieu] = useState([]);
+  const history = useHistory();
 
   // Khi component mở
   useEffect(() => {
@@ -72,6 +74,7 @@ function ChiTietRap({ heThongRapChieu, hinhAnh, tenPhim }) {
   // Click nút giờ, chạy hàm đặt vé
   const handleDatVe = (maLichChieu) => {
     console.log(maLichChieu);
+    history.push(`/datve/${maLichChieu}`);
   };
 
   return (

@@ -4,7 +4,7 @@ import { Redirect, Route } from "react-router-dom";
 function PrivateRoute({ component: PrivatePage, ...props }) {
   const user = JSON.parse(localStorage.getItem("userInfo"));
 
-  if (!user.accessToken) {
+  if (!user) {
     alert("Vui lòng đăng nhập");
     return <Redirect to='/' exact />;
   }

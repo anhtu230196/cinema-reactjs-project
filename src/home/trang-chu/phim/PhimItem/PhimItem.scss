@@ -67,9 +67,10 @@
         margin-bottom: 0;
         overflow: hidden;
         text-overflow: ellipsis;
-        -webkit-line-clamp: 2;
+        -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
         display: -webkit-box;
+        // white-space: nowrap;
       }
     }
     .item-phim__hover {

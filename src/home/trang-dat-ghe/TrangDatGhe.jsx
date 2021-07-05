@@ -11,12 +11,17 @@ import {
   layDanhSachPhongVe,
 } from "../../redux/actions/bookingAction";
 import { formatCurrency } from "../../helpers";
+import { useHistory } from "react-router-dom";
 
 function TrangDatGhe({ match: { params } }) {
   const [showCombo, setShowCombo] = useState(false);
   const [coundown, setCoundown] = useState(120);
   const [danhSachGheDat, setDanhSachGheDat] = useState([]);
   const { taiKhoan } = useSelector((state) => state.userReducer.userInfo);
+  const history = useHistory();
+  const { thongTinPhim, danhSachGhe } = useSelector(
+    (state) => state.bookingReducer
+  );
   const [tienCombo, setTienCombo] = useState(0);
 
   const dispatch = useDispatch();
@@ -25,9 +30,6 @@ function TrangDatGhe({ match: { params } }) {
     dispatch(layDanhSachPhongVe(params.maLichChieu));
   }, [params]);
 
-  const { thongTinPhim, danhSachGhe } = useSelector(
-    (state) => state.bookingReducer
-  );
   // Hàm chạy thời gian
   // useEffect(() => {
   //   const interver = setTimeout(() => {
@@ -62,6 +64,7 @@ function TrangDatGhe({ match: { params } }) {
     }
   };
 
+  // Gọi API đặt vé
   const handleDatVe = () => {
     const filterDanhSachGhe = danhSachGheDat.map((gheDat) => ({
       maGhe: gheDat.maGhe,
@@ -73,7 +76,7 @@ function TrangDatGhe({ match: { params } }) {
       danhSachVe: filterDanhSachGhe,
       taiKhoanNguoiDung: taiKhoan,
     };
-    dispatch(datVeAction(objectDatVe));
+    dispatch(datVeAction(objectDatVe, history));
   };
 
   const tienVe = () => {
