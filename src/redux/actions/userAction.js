@@ -1,4 +1,10 @@
-import { DANGNHAPFAILED, DANGNHAPSUCCESS, LOGOUT } from "./typeActions";
+import {
+  DANGNHAPFAILED,
+  DANGNHAPSUCCESS,
+  LAYTHONGTINDATVE,
+  LOGOUT,
+  UPDATEUSERINFO,
+} from "./typeActions";
 import { api } from "../../instance.axios";
 
 export const getUserLogin = (userInfo) => (dispatch) => {
@@ -23,4 +29,40 @@ export const loginSuccess = (userInfo) => {
     type: DANGNHAPSUCCESS,
     payload: userInfo,
   };
+};
+
+export const layThongTinNguoiDung = (taiKhoan) => (dispatch) => {
+  return api
+    .post("/QuanLyNguoiDung/ThongTinTaiKhoan", { taiKhoan })
+    .then(
+      (res) =>
+        dispatch({
+          type: LAYTHONGTINDATVE,
+          payload: {
+            thongTinDatVe: res.data.thongTinDatVe,
+            matKhau: res.data.matKhau,
+          },
+        })
+      // console.log(res.data)
+    )
+    .catch((error) => console.log(error));
+};
+
+export const updateUserAction = (user) => (dispatch) => {
+  return api
+    .put("/QuanLyNguoiDung/CapNhatThongTinNguoiDung", user)
+    .then((res) => {
+      const userInfoLocal = JSON.parse(localStorage.getItem("userInfo"));
+      userInfoLocal.hoTen = res.data.hoTen;
+      localStorage.setItem("userInfo", JSON.stringify(userInfoLocal));
+      dispatch({
+        type: UPDATEUSERINFO,
+        payload: {
+          matKhau: res.data.matKhau,
+          soDT: res.data.soDT,
+          hoTen: res.data.hoTen,
+        },
+      });
+    })
+    .catch((err) => console.log(err));
 };

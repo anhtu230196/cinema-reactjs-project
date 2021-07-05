@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import HomeLayout from "../HomeLayout";
 import "./TrangThongTinNguoiDung.scss";
 import ThongTinTaiKhoan from "./ThongTinTaiKhoan/ThongTinTaiKhoan";
 import DoiMatKhau from "./DoiMatKhau/DoiMatKhau";
 import LichSuDatVe from "./LichSuDatVe/LichSuDatVe";
+import { useDispatch, useSelector } from "react-redux";
+import { layThongTinNguoiDung } from "../../redux/actions/userAction";
 
 function TrangThongTinNguoiDung() {
+  const [compActive, setCompActive] = useState(0); //0=info \ 1=password \ 2=history
+  const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.userReducer);
+  useEffect(() => {
+    if (userInfo.taiKhoan) {
+      dispatch(layThongTinNguoiDung(userInfo.taiKhoan));
+    }
+  }, [userInfo.taiKhoan]);
+
   return (
     <HomeLayout>
       <div className='user-info mx-auto'>
@@ -27,15 +38,29 @@ function TrangThongTinNguoiDung() {
               <p>Hi! 12345</p>
             </div>
             <div className='user-info-method'>
-              <p className='method-item active'>Thông Tin Tài Khoản</p>
-              <p className='method-item'>Đổi Mật Khẩu</p>
-              <p className='method-item'>Lịch Sử Đặt Vé</p>
+              <p
+                className={`method-item ${compActive === 0 && "active"}`}
+                onClick={() => setCompActive(0)}>
+                Thông Tin Tài Khoản
+              </p>
+              <p
+                className={`method-item ${compActive === 1 && "active"}`}
+                onClick={() => setCompActive(1)}>
+                Đổi Mật Khẩu
+              </p>
+              <p
+                className={`method-item ${compActive === 2 && "active"}`}
+                onClick={() => setCompActive(2)}>
+                Lịch Sử Đặt Vé
+              </p>
             </div>
           </div>
           <div className='col-12 col-sm-7 user-info-right'>
-            {/* <ThongTinTaiKhoan /> */}
-            {/* <DoiMatKhau /> */}
-            <LichSuDatVe />
+            {compActive === 0 && <ThongTinTaiKhoan userInfo={userInfo} />}
+            {compActive === 1 && <DoiMatKhau userInfo={userInfo} />}
+            {compActive === 2 && (
+              <LichSuDatVe danhSachDatVe={userInfo.thongTinDatVe} />
+            )}
           </div>
         </div>
       </div>

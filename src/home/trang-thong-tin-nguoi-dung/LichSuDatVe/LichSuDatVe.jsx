@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Pagination from "@material-ui/lab/Pagination";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,8 +27,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function LichSuDatVe() {
+function LichSuDatVe({ danhSachDatVe }) {
   const classes = useStyles();
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handlePageChange = (e, currentPage) => {
+    setCurrentPage(currentPage);
+  };
+  const itemsPerPage = 5;
+  const lastIndex = currentPage * itemsPerPage;
+  const firstIndex = lastIndex - itemsPerPage;
+  const pageNumber = Math.ceil(danhSachDatVe.length / itemsPerPage);
+
   return (
     <div>
       <h1 className='title'>Lịch Sử Đặt Vé</h1>
@@ -44,46 +55,25 @@ function LichSuDatVe() {
           </thead>
           <tbody>
             {/* Vòng lặp thông tin */}
-            <tr>
-              <td>Tên Phim</td>
-              <td>00:52 ~ (23-06)</td>
-              <td>160 199 </td>
-              <td>585555</td>
-              <td>80000</td>
-            </tr>
-            <tr>
-              <td>Tên Phim</td>
-              <td>00:52 ~ (23-06)</td>
-              <td>160 199</td>
-              <td>585555</td>
-              <td>80000</td>
-            </tr>
-            <tr>
-              <td>Tên Phim</td>
-              <td>00:52 ~ (23-06)</td>
-              <td>160 199</td>
-              <td>585555</td>
-              <td>80000</td>
-            </tr>
-            <tr>
-              <td>Tên Phim</td>
-              <td>00:52 ~ (23-06)</td>
-              <td>160 199</td>
-              <td>585555</td>
-              <td>80000</td>
-            </tr>
-            <tr>
-              <td>Tên Phim</td>
-              <td>00:52 ~ (23-06)</td>
-              <td>160 199</td>
-              <td>585555</td>
-              <td>80000</td>
-            </tr>
+            {danhSachDatVe.slice(firstIndex, lastIndex).map((thongtin) => (
+              <tr key={thongtin.maVe}>
+                <td>{thongtin.tenPhim}</td>
+                <td>{moment(thongtin.ngayDat).format("HH:mm ~ DD/MM/YYYY")}</td>
+                <td>
+                  {thongtin.danhSachGhe.map((ghe) => (
+                    <span className='px-1'>{ghe.tenGhe}</span>
+                  ))}{" "}
+                </td>
+                <td>{thongtin.maVe}</td>
+                <td>{thongtin.giaVe}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
         <div className={classes.root}>
           <Pagination
-            count={4}
+            onChange={handlePageChange}
+            count={pageNumber}
             variant='outlined'
             shape='rounded'
             color='primary'
