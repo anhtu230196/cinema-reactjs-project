@@ -1,4 +1,5 @@
 import {
+  ADDAVATAR,
   CLEARERRORMESSAGE,
   DANGNHAPFAILED,
   DANGNHAPSUCCESS,
@@ -38,6 +39,11 @@ const userReducer = (state = initialState, action) => {
           soDT: action.payload.soDT,
           matKhau: action.payload.matKhau,
         },
+      };
+    case ADDAVATAR:
+      return {
+        ...state,
+        userInfo: { ...state.userInfo, avatar: action.payload },
       };
     case LOGOUT:
       return { ...state, userInfo: {}, error: "" };

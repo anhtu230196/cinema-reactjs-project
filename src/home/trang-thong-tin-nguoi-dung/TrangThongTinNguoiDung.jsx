@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from "react";
+import DefaultAvatar from "../../img/default-user-image.png";
 import HomeLayout from "../HomeLayout";
 import "./TrangThongTinNguoiDung.scss";
 import ThongTinTaiKhoan from "./ThongTinTaiKhoan/ThongTinTaiKhoan";
 import DoiMatKhau from "./DoiMatKhau/DoiMatKhau";
 import LichSuDatVe from "./LichSuDatVe/LichSuDatVe";
 import { useDispatch, useSelector } from "react-redux";
-import { layThongTinNguoiDung } from "../../redux/actions/userAction";
+import {
+  layThongTinNguoiDung,
+  changeAvatar,
+} from "../../redux/actions/userAction";
 
 function TrangThongTinNguoiDung() {
   const [compActive, setCompActive] = useState(0); //0=info \ 1=password \ 2=history
+  const [avatar, setAvatar] = useState("");
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.userReducer);
   useEffect(() => {
@@ -17,6 +22,17 @@ function TrangThongTinNguoiDung() {
     }
   }, [userInfo.taiKhoan]);
 
+  const handleChangeImage = (event) => {
+    let file = event.target.files[0];
+    let reader = new FileReader();
+    if (file) {
+      reader.readAsDataURL(file);
+      reader.onload = function (e) {
+        setAvatar(e.target.result);
+        dispatch(changeAvatar(e.target.result, userInfo.taiKhoan));
+      };
+    }
+  };
   return (
     <HomeLayout>
       <div className='user-info mx-auto'>
@@ -25,13 +41,19 @@ function TrangThongTinNguoiDung() {
             <div className='user-avatar'>
               <div className='avatar'>
                 <label htmlFor='fileInput'>
-                  <img src='assets/img/default-user-image.png' alt='' />
+                  <img src={userInfo.avatar || DefaultAvatar} alt='' />
+                  {/* <img src={`${avatar}`} alt='' /> */}
                   <i className='fas fa-upload'></i>
                   <div className='bgc-label'></div>
                 </label>
               </div>
               <div className='avatar-upload'>
-                <input type='file' hidden />
+                <input
+                  id='fileInput'
+                  type='file'
+                  hidden
+                  onChange={handleChangeImage}
+                />
               </div>
             </div>
             <div className='user-name'>

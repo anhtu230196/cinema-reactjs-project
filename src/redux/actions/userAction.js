@@ -1,4 +1,5 @@
 import {
+  ADDAVATAR,
   DANGNHAPFAILED,
   DANGNHAPSUCCESS,
   LAYTHONGTINDATVE,
@@ -13,6 +14,10 @@ export const getUserLogin = (userInfo) => (dispatch) => {
     .then((res) => {
       dispatch(loginSuccess(res.data));
       localStorage.setItem("userInfo", JSON.stringify(res.data));
+      const avatar = localStorage.getItem(res.data.taiKhoan);
+      if (avatar) {
+        dispatch(initAvatar(avatar));
+      }
     })
     .catch((err) =>
       dispatch({ type: DANGNHAPFAILED, payload: err.response.data })
@@ -63,6 +68,17 @@ export const updateUserAction = (user) => (dispatch) => {
           hoTen: res.data.hoTen,
         },
       });
+      alert("Cập Nhập Thành Công");
     })
     .catch((err) => console.log(err));
+};
+
+// Thay đổi avatar, lưu local, dispatch lên store
+export const changeAvatar = (fileUrl, taiKhoan) => (dispatch) => {
+  localStorage.setItem(taiKhoan, fileUrl);
+  dispatch(initAvatar(fileUrl));
+};
+
+export const initAvatar = (urlImg) => {
+  return { type: ADDAVATAR, payload: urlImg };
 };
