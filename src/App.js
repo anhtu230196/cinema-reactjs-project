@@ -28,9 +28,8 @@ function App() {
     if (userInfo) {
       dispatch(loginSuccess(userInfo));
       const avatar = localStorage.getItem(userInfo.taiKhoan);
-      console.log(JSON.parse(avatar));
       if (avatar) {
-        dispatch(initAvatar(JSON.parse(avatar).img));
+        dispatch(initAvatar(avatar));
       }
     }
   }, []);

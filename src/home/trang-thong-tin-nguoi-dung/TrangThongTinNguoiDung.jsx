@@ -13,6 +13,7 @@ import {
 
 function TrangThongTinNguoiDung() {
   const [compActive, setCompActive] = useState(0); //0=info \ 1=password \ 2=history
+  const [avatar, setAvatar] = useState("");
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.userReducer);
   useEffect(() => {
@@ -22,19 +23,12 @@ function TrangThongTinNguoiDung() {
   }, [userInfo.taiKhoan]);
 
   const handleChangeImage = (event) => {
-    // if (event.target.files && event.target.files[0]) {
-    //   var reader = new FileReader();
-    //   reader.readAsDataURL(event.target.files[0]);
-    //   reader.onload = (event) => {
-    //     dispatch(changeAvatar(event.target.result, userInfo.taiKhoan));
-    //   };
-    // }
-
     let file = event.target.files[0];
     let reader = new FileReader();
     if (file) {
       reader.readAsDataURL(file);
       reader.onload = function (e) {
+        setAvatar(e.target.result);
         dispatch(changeAvatar(e.target.result, userInfo.taiKhoan));
       };
     }
@@ -48,6 +42,7 @@ function TrangThongTinNguoiDung() {
               <div className='avatar'>
                 <label htmlFor='fileInput'>
                   <img src={userInfo.avatar || DefaultAvatar} alt='' />
+                  {/* <img src={`${avatar}`} alt='' /> */}
                   <i className='fas fa-upload'></i>
                   <div className='bgc-label'></div>
                 </label>
@@ -58,7 +53,6 @@ function TrangThongTinNguoiDung() {
                   type='file'
                   hidden
                   onChange={handleChangeImage}
-                  accept='image/*'
                 />
               </div>
             </div>

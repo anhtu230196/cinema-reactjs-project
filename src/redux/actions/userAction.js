@@ -16,7 +16,7 @@ export const getUserLogin = (userInfo) => (dispatch) => {
       localStorage.setItem("userInfo", JSON.stringify(res.data));
       const avatar = localStorage.getItem(res.data.taiKhoan);
       if (avatar) {
-        dispatch(initAvatar(JSON.parse(avatar).img));
+        dispatch(initAvatar(avatar));
       }
     })
     .catch((err) =>
@@ -75,8 +75,7 @@ export const updateUserAction = (user) => (dispatch) => {
 
 // Thay đổi avatar, lưu local, dispatch lên store
 export const changeAvatar = (fileUrl, taiKhoan) => (dispatch) => {
-  const imgUser = { taiKhoan: taiKhoan, img: fileUrl };
-  localStorage.setItem(taiKhoan, JSON.stringify(imgUser));
+  localStorage.setItem(taiKhoan, fileUrl);
   dispatch(initAvatar(fileUrl));
 };
 
