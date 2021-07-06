@@ -76,7 +76,7 @@ export const updateUserAction = (user) => (dispatch) => {
 // Thay đổi avatar, lưu local, dispatch lên store
 export const changeAvatar = (fileUrl, taiKhoan) => (dispatch) => {
   const imgUser = { taiKhoan: taiKhoan, img: fileUrl };
-  // localStorage.setItem(taiKhoan, JSON.stringify(imgUser));
+  localStorage.setItem(taiKhoan, JSON.stringify(imgUser));
   dispatch(initAvatar(fileUrl));
 };
 
