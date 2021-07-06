@@ -8,7 +8,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import TrangThongTinNguoiDung from "./home/trang-thong-tin-nguoi-dung/TrangThongTinNguoiDung";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { loginSuccess } from "./redux/actions/userAction";
+import { initAvatar, loginSuccess } from "./redux/actions/userAction";
 import PrivateRoute from "./HOCs/PrivateRoute";
 
 const theme = createMuiTheme({
@@ -27,6 +27,11 @@ function App() {
 
     if (userInfo) {
       dispatch(loginSuccess(userInfo));
+      const avatar = localStorage.getItem(userInfo.taiKhoan);
+      console.log(JSON.parse(avatar));
+      if (avatar) {
+        dispatch(initAvatar(JSON.parse(avatar).img));
+      }
     }
   }, []);
 

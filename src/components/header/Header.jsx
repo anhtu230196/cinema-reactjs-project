@@ -110,7 +110,7 @@ function Header({ hideDangNhap }) {
           <div className='navbar__right'>
             {userInfo.taiKhoan ? (
               <div className='helloUser d-flex'>
-                <Avatar className={classes.small} src='' />
+                <Avatar className={classes.small} src={userInfo.avatar} />
 
                 <span className='UserName'>{userInfo.taiKhoan}</span>
                 <div className='UserInfo'>
