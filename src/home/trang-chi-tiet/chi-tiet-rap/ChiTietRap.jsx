@@ -5,8 +5,13 @@ import { getColorCinema } from "../../../helpers";
 
 import "./ChiTietRap.scss";
 
-function ChiTietRap({ heThongRapChieu, hinhAnh, tenPhim }) {
-  const [heThongActive, setHeThongActive] = useState("BHDStar");
+function ChiTietRap({
+  heThongRapChieu,
+  hinhAnh,
+  tenPhim,
+  heThongActiveDefault,
+}) {
+  const [heThongActive, setHeThongActive] = useState("");
   const [cumRapChieu, setCumRapChieu] = useState([]);
   const [logoRap, setLogoRap] = useState("");
   const [rapActiveIndex, setRapActiveIndex] = useState(0);
@@ -17,29 +22,32 @@ function ChiTietRap({ heThongRapChieu, hinhAnh, tenPhim }) {
 
   // Khi component mở
   useEffect(() => {
-    if (heThongRapChieu) {
-      handleChangeHeThong(heThongActive);
-    }
-  }, [heThongRapChieu, cumRapChieu]);
+    handleChangeHeThong();
+  }, [heThongActiveDefault]);
+
+  useEffect(() => {
+    handleChangeRap();
+  }, [cumRapChieu]);
 
   // Thay đổi Hệ Thống Rạp, maHeThong: CGV, Galaxy...
-  const handleChangeHeThong = (maHeThong) => {
+  const handleChangeHeThong = (maHeThong = heThongActiveDefault) => {
     // Active Hệ Thống đc chọn
     setHeThongActive(maHeThong);
     // Lọc Hệ Thống đc chọn trong list heThongRapChieu đc truyền vào
     const heThongChieu = heThongRapChieu.find(
       (heThong) => heThong.maHeThongRap === maHeThong
     );
-    setLogoRap(heThongChieu.logo);
-    setCumRapChieu(heThongChieu.cumRapChieu);
+    setLogoRap(heThongChieu?.logo);
+    setCumRapChieu(heThongChieu?.cumRapChieu);
     // Mỗi lần thay đổi hệ thống => active lại rạp đầu tiên, set lại mảng ngày Chiếu
     handleChangeRap(0);
   };
 
   // Thay Đổi Rạp
-  const handleChangeRap = (index) => {
+  const handleChangeRap = (index = 0) => {
     setRapActiveIndex(index);
-    if (cumRapChieu.length > 0) {
+    // console.log(cumRapChieu);
+    if (cumRapChieu?.length > 0) {
       // console.log(cumRapChieu[index]);
       // Rút gọn Array lại thành mảng ngayChieuGioChieu
       let danhSachNgayChieu = cumRapChieu[index].lichChieuPhim.map(
@@ -73,7 +81,6 @@ function ChiTietRap({ heThongRapChieu, hinhAnh, tenPhim }) {
 
   // Click nút giờ, chạy hàm đặt vé
   const handleDatVe = (maLichChieu) => {
-    console.log(maLichChieu);
     history.push(`/datve/${maLichChieu}`);
   };
 
@@ -99,7 +106,7 @@ function ChiTietRap({ heThongRapChieu, hinhAnh, tenPhim }) {
         <div className='col-12 col-md-6 col-lg-4'>
           {/* Danh sách Rạp */}
           <ul className='lich-chieu__rap'>
-            {cumRapChieu.length &&
+            {cumRapChieu?.length &&
               cumRapChieu.map((rap, key) => (
                 <li
                   key={key}

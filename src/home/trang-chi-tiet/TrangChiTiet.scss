@@ -93,6 +93,7 @@
     .header-circleStar {
       align-self: center;
       margin-left: auto;
+      flex-shrink: 0;
       .circlePercent {
         i {
           text-shadow: 0 0 6px rgba(255, 88, 96, 0.5);

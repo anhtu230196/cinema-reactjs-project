@@ -22,6 +22,13 @@ function TrangChiTiet() {
 
   const [showContent, setShowContent] = useState(0); // show page lịch chiếu, thông tin, đánh giá
   const [trailerId, setTrailerId] = useState("");
+  const [heThongActiveDefault, setHeThongActive] = useState("");
+
+  useEffect(() => {
+    if (movieDetail.maPhim) {
+      setHeThongActive(movieDetail.heThongRapChieu[0].maHeThongRap);
+    }
+  }, [movieDetail]);
 
   useEffect(() => {
     setCurrentWidth(window.innerWidth);
@@ -29,7 +36,6 @@ function TrangChiTiet() {
   }, [maPhim]);
   return (
     <HomeLayout>
-      {!movieDetail && <p>loading...</p>}
       <div className='detail'>
         <div className='detail-header'>
           <div className='styleGradient'></div>
@@ -148,11 +154,14 @@ function TrangChiTiet() {
           </div>
           <div className='detail-footer__content py-lg-5 py-md-3'>
             {/* <ChiTietInfo /> */}
-            <ChiTietRap
-              heThongRapChieu={movieDetail.heThongRapChieu}
-              hinhAnh={movieDetail.hinhAnh}
-              tenPhim={movieDetail.tenPhim}
-            />
+            {movieDetail.tenPhim && showContent === 0 && (
+              <ChiTietRap
+                heThongRapChieu={movieDetail.heThongRapChieu}
+                hinhAnh={movieDetail.hinhAnh}
+                tenPhim={movieDetail.tenPhim}
+                heThongActiveDefault={heThongActiveDefault}
+              />
+            )}
           </div>
         </div>
 

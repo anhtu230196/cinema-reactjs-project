@@ -16,7 +16,7 @@ export const layDanhSachPhongVe = (maLichChieu) => async (dispatch) => {
 
 export const datVeAction = (objectDatVe, history) => async (dispatch) => {
   try {
-    // const res = await api.post("/QuanLyDatVe/DatVe", objectDatVe);
+    const res = await api.post("/QuanLyDatVe/DatVe", objectDatVe);
     console.log(history);
   } catch (error) {
     console.log(error);

@@ -29,6 +29,15 @@
         white-space: nowrap;
         text-overflow: ellipsis;
       }
+      span {
+        // text-overflow: ellipsis;
+        // overflow: hidden;
+        // white-space: nowrap;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
     }
     .dropdown-menu--config {
       top: 10px !important;
@@ -39,6 +48,7 @@
       transform: translate3d(10px, 33px, 0px) !important;
       .dropdown-item {
         padding: 0.25rem 0.5rem;
+        cursor: default;
       }
     }
   }
