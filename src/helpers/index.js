@@ -39,3 +39,6 @@ export const getColorCinema = (tenCumRap) => {
       return {};
   }
 };
+
+// format momentjs
+function formatFromNow(time) {}

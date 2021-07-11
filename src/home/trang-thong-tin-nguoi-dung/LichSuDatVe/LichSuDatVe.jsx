@@ -64,7 +64,9 @@ function LichSuDatVe({ danhSachDatVe }) {
                     <span className='px-1'>{ghe.tenGhe}</span>
                   ))}{" "}
                 </td>
-                <td>{thongtin.maVe}</td>
+                <td>
+                  <span>{thongtin.maVe}</span>
+                </td>
                 <td>{thongtin.giaVe}</td>
               </tr>
             ))}

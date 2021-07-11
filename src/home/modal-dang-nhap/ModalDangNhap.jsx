@@ -75,7 +75,7 @@ class ModalDangNhap extends Component {
                   </div>
                   <div className={classes.formItem}>
                     <input
-                      type='text'
+                      type='password'
                       placeholder='Mật Khẩu'
                       name='matKhau'
                       value={this.state.info.matKhau}

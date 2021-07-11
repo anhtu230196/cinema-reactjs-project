@@ -14,7 +14,7 @@ function PhimComponent() {
   }, []);
 
   return (
-    <div className='container '>
+    <div className='container' id='danhSachPhim'>
       <div className='pt-5'>
         <div className='text-center'>
           <h3

@@ -161,3 +161,57 @@
   margin-top: 30px;
   transform: unset;
 }
+
+@media screen and(max-width: 1000px) {
+  .user-info {
+    font-size: 15px;
+    .user-info-left {
+      padding: 0;
+      .user-info-method {
+        .method-item {
+          &.active {
+            font-size: 16px;
+            &::after {
+              content: unset;
+            }
+          }
+        }
+      }
+    }
+    .user-info-right {
+      margin-top: 20px;
+      .button-capNhap {
+        width: unset;
+      }
+    }
+    .user-info--content {
+      padding: 50px 20px 20px;
+      max-width: 100%;
+      margin: 5px;
+    }
+  }
+
+  .table {
+    font-size: 15px;
+    tbody {
+      tr {
+        span {
+          display: inline-block;
+        }
+      }
+    }
+  }
+  .table > :not(caption) > * > * {
+    padding: 4px;
+  }
+}
+
+@media screen and(max-width: 500px) {
+  .user-info-method {
+    display: flex;
+    justify-content: space-between;
+    .method-item {
+      margin: 0 10px;
+    }
+  }
+}

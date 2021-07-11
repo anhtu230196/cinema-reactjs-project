@@ -1,6 +1,8 @@
 import moment from "moment";
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import swal from "sweetalert";
 import { getColorCinema } from "../../../helpers";
 
 import "./ChiTietRap.scss";
@@ -19,6 +21,7 @@ function ChiTietRap({
   const [ngayActiveIndex, setNgayActiveIndex] = useState(0);
   const [listLichChieu, setListLichChieu] = useState([]);
   const history = useHistory();
+  const { userInfo } = useSelector((state) => state.userReducer);
 
   // Khi component mở
   useEffect(() => {
@@ -81,6 +84,9 @@ function ChiTietRap({
 
   // Click nút giờ, chạy hàm đặt vé
   const handleDatVe = (maLichChieu) => {
+    if (!userInfo.taiKhoan) {
+      return swal("Vui lòng Đăng Nhập Để Đặt Vé");
+    }
     history.push(`/datve/${maLichChieu}`);
   };
 

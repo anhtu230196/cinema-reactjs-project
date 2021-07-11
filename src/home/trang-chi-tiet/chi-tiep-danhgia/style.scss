@@ -1,0 +1,114 @@
+.chiTiet_danhGia {
+  padding: 50px;
+  //   max-width: 1100px;
+  margin: 0 auto;
+}
+.danhGia_header {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  max-width: 75%;
+  border-radius: 5px;
+  margin: 0 auto;
+  position: relative;
+  cursor: pointer;
+  .danhGia-header__content {
+    align-items: center;
+    padding: 8px 15px;
+    display: flex;
+    cursor: text;
+    p {
+      align-self: center;
+      color: rgba(0, 0, 0, 0.637);
+      margin: 0;
+      padding: 0;
+      margin-left: 10px;
+      font-size: 18px;
+    }
+    .star {
+      margin-left: auto;
+      color: var(--primary-color);
+      font-size: 25px;
+    }
+  }
+}
+
+.danhGia_body {
+  max-width: 75%;
+  padding: 25px 15px;
+  margin: 0 auto;
+  .body__content {
+    width: 45%;
+    &:nth-child(even) {
+      margin-left: auto;
+    }
+    .body__title {
+      padding: 15px 10px;
+      display: flex;
+      justify-content: space-between;
+      p {
+        color: #fff;
+        font-weight: 550;
+        align-self: center;
+        margin: 0;
+        padding: 0;
+      }
+      .body__star {
+        color: #ff55a5;
+      }
+    }
+  }
+  .danhGia-body__content {
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 8px 15px;
+    display: flex;
+    p {
+      align-self: center;
+      color: #000;
+      font-weight: 450;
+      pointer-events: none;
+      margin: 0;
+      padding: 0;
+      margin-left: 10px;
+    }
+  }
+  .danhGia-body__footer {
+    font-size: 13px;
+    color: #a0a0a0;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .chiTiet_danhGia {
+    padding: 50px 10px;
+  }
+  .danhGia_body {
+    max-width: unset;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .chiTiet_danhGia {
+    padding: 30px 0;
+  }
+  .danhGia_header {
+    max-width: 90%;
+    .danhGia-header__content {
+      padding: 8px;
+      p {
+        font-size: 15px;
+      }
+      .star {
+        font-size: 18px;
+      }
+    }
+  }
+  .danhGia_body {
+    max-width: unset;
+    .body__content {
+      width: 100%;
+      margin-bottom: 25px;
+    }
+  }
+}

@@ -21,6 +21,8 @@ const movieReducer = (state = initialState, action) => {
       return { ...state, loading: false };
     case GETMOVIEDETAILSUCCESS:
       return { ...state, movieDetail: action.payload };
+    case "RESETMOVIEDETAIL":
+      return { ...state, movieDetail: {} };
     default:
       return state;
   }

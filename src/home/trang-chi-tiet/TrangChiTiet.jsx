@@ -13,12 +13,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { getMovieDetail } from "../../redux/actions/movieAction";
 import { getTrailerId } from "../../helpers/index";
 import moment from "moment";
+import { useRef } from "react";
+import DanhGiaComp from "./chi-tiep-danhgia/DanhGiaComp";
 
 function TrangChiTiet() {
   const [currentWidth, setCurrentWidth] = useState(undefined);
   const { maPhim } = useParams();
   const dispatch = useDispatch();
   const { movieDetail } = useSelector((state) => state.movieReducer);
+  const lichChieu = useRef();
 
   const [showContent, setShowContent] = useState(0); // show page lịch chiếu, thông tin, đánh giá
   const [trailerId, setTrailerId] = useState("");
@@ -34,6 +37,12 @@ function TrangChiTiet() {
     setCurrentWidth(window.innerWidth);
     dispatch(getMovieDetail(maPhim));
   }, [maPhim]);
+
+  // Nút Mua Vé
+  const handleScrollTo = () => {
+    setShowContent(0); // Chuyến vè component hệ thống rạp rồi scroll xuống
+    lichChieu.current.scrollIntoView();
+  };
   return (
     <HomeLayout>
       <div className='detail'>
@@ -96,7 +105,9 @@ function TrangChiTiet() {
                   </div>
                   <p className='duration'>120 Phút</p>
                   <div className='header-title__button mt-3'>
-                    <button className='button-primary button-big'>
+                    <button
+                      className='button-primary button-big'
+                      onClick={handleScrollTo}>
                       Mua Vé
                     </button>
                   </div>
@@ -134,7 +145,7 @@ function TrangChiTiet() {
           )}
         </div>
 
-        <div id='lichChieu' className='detail-footer mx-auto'>
+        <div id='lichChieu' className='detail-footer mx-auto' ref={lichChieu}>
           <div className='detail-footer-title text-center'>
             <h3
               className={`d-inline ${showContent === 0 ? "active" : ""}`}
@@ -153,7 +164,6 @@ function TrangChiTiet() {
             </h3>
           </div>
           <div className='detail-footer__content py-lg-5 py-md-3'>
-            {/* <ChiTietInfo /> */}
             {movieDetail.tenPhim && showContent === 0 && (
               <ChiTietRap
                 heThongRapChieu={movieDetail.heThongRapChieu}
@@ -162,6 +172,15 @@ function TrangChiTiet() {
                 heThongActiveDefault={heThongActiveDefault}
               />
             )}
+            {showContent === 1 && (
+              <ChiTietInfo
+                tenPhim={movieDetail.tenPhim}
+                trailer={movieDetail.trailer}
+                moTa={movieDetail.moTa}
+                ngayKhoiChieu={movieDetail.ngayKhoiChieu}
+              />
+            )}
+            {showContent === 2 && <DanhGiaComp />}
           </div>
         </div>
 

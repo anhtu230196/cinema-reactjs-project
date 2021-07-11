@@ -52,7 +52,9 @@ function PhimItem({ movie, setTrailer }) {
             onClick={handleSetTrailer}
           />
           <div className='hover__button'>
-            <button className='w-100 button-primary'>
+            <button
+              className='w-100 button-primary'
+              onClick={() => history.push(`/chitiet/${movie.maPhim}`)}>
               <span>Mua Vé</span>
             </button>
           </div>

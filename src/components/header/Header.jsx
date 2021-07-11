@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { logoutAction } from "../../redux/actions/userAction";
 import logo from "../../img/logo.png";
+import { cumRap, handleGoToView, ungDung } from "../../home/HomeLayout";
 
 const useStyles = makeStyles((theme) => ({
   small: {
@@ -40,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Header({ hideDangNhap }) {
+function Header({ hideDangNhap, fullOptionsHeader }) {
   const [hideMenu, setHideMenu] = useState(true); // toggle Menu Navs: true => ẩn menu
   const classes = useStyles();
   const modalDangNhap = useRef(null);
@@ -85,15 +86,24 @@ function Header({ hideDangNhap }) {
         </div>
         <div className={`${hideMenu && "collapse"} navbar-collapse`}>
           <ul className='navbar-nav text-center mx-auto'>
-            <li className='nav-item'>
-              <a className='nav-link'>Cụm Rạp</a>
-            </li>
-            <li className='nav-item'>
-              <a className='nav-link'>Tin Tức</a>
-            </li>
-            <li className='nav-item'>
-              <a className='nav-link'>Ứng Dụng</a>
-            </li>
+            {fullOptionsHeader ? (
+              <>
+                <li className='nav-item'>
+                  <Link
+                    className='nav-link'
+                    onClick={() => handleGoToView(cumRap)}>
+                    Cụm Rạp
+                  </Link>
+                </li>
+                <li className='nav-item'>
+                  <Link
+                    className='nav-link'
+                    onClick={() => handleGoToView(ungDung)}>
+                    Ứng Dụng
+                  </Link>
+                </li>
+              </>
+            ) : null}
           </ul>
         </div>
       </nav>

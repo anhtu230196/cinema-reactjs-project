@@ -25,6 +25,7 @@ function TrangThongTinNguoiDung() {
   const handleChangeImage = (event) => {
     let file = event.target.files[0];
     let reader = new FileReader();
+    console.log(file);
     if (file) {
       reader.readAsDataURL(file);
       reader.onload = function (e) {

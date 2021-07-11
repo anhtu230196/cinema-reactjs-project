@@ -108,6 +108,7 @@
     .detail-footer-title {
       h3 {
         padding: 0 30px;
+        cursor: pointer;
       }
       &.active {
         color: #ff55a5;
@@ -190,6 +191,20 @@
           transition: all 0.5s;
           &.active {
             font-size: 20px !important;
+          }
+        }
+      }
+    }
+    .lich-chieu__phim {
+      .lichPhim {
+        padding-left: 15px;
+        .lich-phim__item {
+          .lich-phim__ngayXem {
+            margin: 0 auto;
+            padding: 7px 0;
+          }
+          .gioXem {
+            text-align: center;
           }
         }
       }

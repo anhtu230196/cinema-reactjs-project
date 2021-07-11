@@ -1,21 +1,24 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import HomeLayout from "./../HomeLayout";
-import Slider from "./slider/Slider";
-import MuaVe from "./mua-ve/MuaVe";
-import PhimComponent from "./phim/PhimComponent";
-import UngDung from "./ung-dung/UngDung";
-import HeThongRap from "./he-thong-rap/HeThongRap";
+import LoadingPage from "../../components/loading-page/LoadingPage";
+const Slider = lazy(() => import("./slider/Slider"));
+const MuaVe = lazy(() => import("./mua-ve/MuaVe"));
+const PhimComponent = lazy(() => import("./phim/PhimComponent"));
+const UngDung = lazy(() => import("./ung-dung/UngDung"));
+const HeThongRap = lazy(() => import("./he-thong-rap/HeThongRap"));
 
 function TrangChu() {
   return (
-    <HomeLayout>
+    <HomeLayout fullOptionsHeader>
       <div style={{ paddingTop: 80 }}>
-        <Slider />
-        <MuaVe />
-        <PhimComponent />
-        <div className='break-line'></div>
-        <HeThongRap />
-        <UngDung />
+        <Suspense fallback={<LoadingPage />}>
+          <Slider />
+          <MuaVe />
+          <PhimComponent />
+          <div className='break-line' id='cumrap'></div>
+          <HeThongRap />
+          <UngDung />
+        </Suspense>
       </div>
     </HomeLayout>
   );

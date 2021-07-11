@@ -2,7 +2,18 @@ import React from "react";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import { memo } from "react";
-function HomeLayout({ children, hideDangNhap }) {
+import ScrollToTop from "../components/ScrollToTop";
+
+export const cumRap = document.getElementById("cumrap");
+export const ungDung = document.getElementById("ungdung");
+
+export const handleGoToView = (view) => {
+  console.log(view);
+  if (view) {
+    view.scrollIntoView({ behavior: "smooth" });
+  }
+};
+function HomeLayout({ children, hideDangNhap, fullOptionsHeader }) {
   return (
     <div
       style={{
@@ -12,7 +23,11 @@ function HomeLayout({ children, hideDangNhap }) {
         minHeight: "100%",
         color: "white",
       }}>
-      <Header hideDangNhap={hideDangNhap} />
+      <ScrollToTop />
+      <Header
+        hideDangNhap={hideDangNhap}
+        fullOptionsHeader={fullOptionsHeader}
+      />
       <div>{children}</div>
       <Footer />
     </div>

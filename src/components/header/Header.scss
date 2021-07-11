@@ -32,6 +32,9 @@
     &:hover {
       color: var(--primary-color);
     }
+    &:focus {
+      color: white;
+    }
   }
   i {
     color: white;

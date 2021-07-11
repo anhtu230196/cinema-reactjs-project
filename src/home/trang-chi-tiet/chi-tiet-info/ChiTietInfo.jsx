@@ -1,13 +1,17 @@
+import moment from "moment";
 import React from "react";
+import { getTrailerId } from "../../../helpers";
 import "./ChiTietInfo.scss";
-function ChiTietInfo() {
+function ChiTietInfo({ trailer, tenPhim, ngayKhoiChieu, moTa }) {
   return (
     <div className='chiTiet-info mx-auto' id='detailMain'>
       <div className='row isFlex detailMainStyle'>
         <div className='col-md-8 col-lg-6 col-12 film left'>
           <div className='row rowLeftInfo'>
             <p className='contentTitle'>Ngày công chiếu</p>
-            <p className='contentInfo ng-binding'></p>
+            <p className='contentInfo ng-binding'>
+              {moment(ngayKhoiChieu).format("DD-MM-YYYY")}
+            </p>
           </div>
 
           <div className='row rowLeftInfo'>
@@ -44,12 +48,7 @@ function ChiTietInfo() {
           </div>
 
           <div className='row rowLeftInfo'>
-            <p className='contentInfoFull description ng-binding'>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sint
-              vero rerum provident perspiciatis dolorum rem adipisci autem
-              repellat id quae! Commodi consequuntur quam numquam modi et
-              architecto, dolores impedit minus!
-            </p>
+            <p className='contentInfoFull description ng-binding'>{moTa}</p>
           </div>
 
           <div className='row rowLeftInfo'>
@@ -64,7 +63,7 @@ function ChiTietInfo() {
           <iframe
             width='100%'
             height='550px'
-            src='https://www.youtube.com/embed/KMX_FuOLoCI'
+            src={`https://www.youtube.com/embed/${getTrailerId(trailer)}`}
             title='YouTube video player'
             frameborder='0'
             allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'

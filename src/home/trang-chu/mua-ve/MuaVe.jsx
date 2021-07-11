@@ -2,11 +2,13 @@ import moment from "moment";
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import swal from "sweetalert";
 import { getMovieDetail } from "../../../redux/actions/movieAction";
 import "./MuaVe.scss";
 
 function MuaVe() {
   const { movieList, movieDetail } = useSelector((state) => state.movieReducer);
+  const { userInfo } = useSelector((state) => state.userReducer);
   const wrapperRef = useRef();
   const history = useHistory();
   const initialDropDown = {
@@ -60,6 +62,7 @@ function MuaVe() {
     document.addEventListener("mousedown", handleClickOutSide);
     return () => {
       document.removeEventListener("mousedown", handleClickOutSide);
+      dispatch({ type: "RESETMOVIEDETAIL" });
     };
   }, []);
 
@@ -130,7 +133,12 @@ function MuaVe() {
   };
 
   const handleDatVe = () => {
-    console.log(maLichChieu);
+    if (!maLichChieu) {
+      return;
+    }
+    if (!userInfo.taiKhoan) {
+      return swal("Vui Lòng Đăng Nhập Để Đặt Vé");
+    }
     history.push(`/datve/${maLichChieu}`);
   };
 

@@ -8,7 +8,7 @@ function Footer() {
         <div className='row'>
           <div className='col-lg-5 col-xs-12 about-company'>
             <h4 className='mb-3'>Cybersoft</h4>
-            <p className='text-white-50'>Đồ án cuối khóa CyberSoft - Angular</p>
+            <p className='text-white-50'>Đồ án cuối khóa CyberSoft - ReactJs</p>
             <p className='text-white-50'>Học Viên: Vũ Anh Tú - Lớp FE47</p>
           </div>
           <div className='col-lg-3 col-xs-12 links'>

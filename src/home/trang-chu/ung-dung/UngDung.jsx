@@ -27,6 +27,7 @@ function SliderMobile() {
 function UngDung() {
   return (
     <div
+      id='ungdung'
       className='ung-dung'
       style={{
         backgroundImage: `url("../../../../assets/img/background.jpg")`,

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./TrangDatGhe.scss";
 import HomeLayout from "../HomeLayout";
 import DanhSachGhe from "./danh-sach-ghe/DanhSachGhe";
@@ -12,10 +12,15 @@ import {
 } from "../../redux/actions/bookingAction";
 import { formatCurrency } from "../../helpers";
 import { useHistory } from "react-router-dom";
+import swal from "sweetalert";
+import LoadingPage from "../../components/loading-page/LoadingPage";
+import ScrollToTop from "../../components/ScrollToTop";
 
 function TrangDatGhe({ match: { params } }) {
+  const buttonCombo = useRef();
+  const infoPhim = useRef();
   const [showCombo, setShowCombo] = useState(false);
-  const [coundown, setCoundown] = useState(120);
+  const [coundown, setCoundown] = useState(180); //Đơn vị giây
   const [danhSachGheDat, setDanhSachGheDat] = useState([]);
   const { taiKhoan } = useSelector((state) => state.userReducer.userInfo);
   const history = useHistory();
@@ -31,18 +36,27 @@ function TrangDatGhe({ match: { params } }) {
   }, [params]);
 
   // Hàm chạy thời gian
-  // useEffect(() => {
-  //   const interver = setTimeout(() => {
-  //     setCoundown((prevTime) => prevTime - 1);
-  //   }, 1000);
-  //   return () => {
-  //     clearTimeout(interver);
-  //   };
-  // }, [coundown]);
+  useEffect(() => {
+    const interver = setTimeout(() => {
+      setCoundown((prevTime) => prevTime - 1);
+    }, 1000);
+    if (coundown < 1) {
+      clearTimeout(interver);
+    }
+    return () => {
+      clearTimeout(interver);
+    };
+  }, [coundown]);
 
   // Về Trang Chủ Khi Hết Thời Gian Đặt Vé
   if (coundown <= 0) {
-    // return <Redirect to='/' exact />;
+    swal({
+      icon: "warning",
+      title: "Hết thời gian Đặt Vé!",
+      timer: 7000,
+    }).then(() => {
+      window.location.reload();
+    });
   }
 
   // Format CountDown String
@@ -87,9 +101,25 @@ function TrangDatGhe({ match: { params } }) {
     return tienVe() + tienCombo;
   };
 
+  window.addEventListener("scroll", () => {
+    // console.log(buttonCombo.current.getBoundingClientRect().top);
+    if (infoPhim.current) {
+      let top = infoPhim.current.getBoundingClientRect().top;
+      let innerHeight = window.innerHeight;
+      // console.log(top);
+      // console.log(innerHeight);
+      if (top > innerHeight - 100) {
+        // console.log(buttonCombo.current);
+        buttonCombo.current.style.display = "none";
+      } else {
+        buttonCombo.current.style.display = "block";
+      }
+    }
+  });
+
   return (
     <HomeLayout>
-      {danhSachGhe ? (
+      {danhSachGhe.length ? (
         <div className='container datVe-container pb-5'>
           <div className='row'>
             {/* Cột Ghế */}
@@ -121,7 +151,7 @@ function TrangDatGhe({ match: { params } }) {
             {/* End Cột Ghế */}
 
             {/* Cột Thông Tin Đặt Vé */}
-            <div className='col-12 col-sm-6 col-lg-5'>
+            <div className='col-12 col-sm-6 col-lg-5' ref={infoPhim}>
               <div className='ve__info-phim'>
                 <img src={thongTinPhim.hinhAnh} alt='' />
                 <div className='ve-info'>
@@ -199,6 +229,7 @@ function TrangDatGhe({ match: { params } }) {
             alt=''
             className={`btn-combo ${showCombo && "show-combo"}`}
             onClick={() => setShowCombo(!showCombo)}
+            ref={buttonCombo}
           />
           <ShowCompo
             showCombo={showCombo}
@@ -207,7 +238,7 @@ function TrangDatGhe({ match: { params } }) {
           />
         </div>
       ) : (
-        <p>Loading...</p>
+        <LoadingPage />
       )}
     </HomeLayout>
   );

@@ -60,6 +60,16 @@ $height: 620px;
   }
 }
 
+@media screen and(max-width: 1000px) {
+  .lich-chieu {
+    .lich-chieu__phim {
+      .lichPhim {
+        padding: unset;
+      }
+    }
+  }
+}
+
 @media screen and(max-width: 450px) {
   .lich-chieu {
     color: black;
