@@ -18,7 +18,6 @@ export const layDanhSachPhongVe = (maLichChieu) => async (dispatch) => {
 export const datVeAction = (objectDatVe, history) => async (dispatch) => {
   try {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    console.log(userInfo);
     let token;
     if (userInfo) {
       token = userInfo.accessToken;
@@ -42,6 +41,16 @@ export const datVeAction = (objectDatVe, history) => async (dispatch) => {
       });
     }
   } catch (error) {
-    console.log(error);
+    swal({
+      title: "Đặt vé thất bại!",
+      text: "Vui lòng đăng nhập lại để tiếp tục đặt vé!",
+      icon: "failed",
+      buttons: ["Hủy", "Đồng ý"],
+      dangerMode: true,
+    }).then((res) => {
+      if (!res) {
+        history.push("/");
+      }
+    });
   }
 };
