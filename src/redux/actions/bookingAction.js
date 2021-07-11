@@ -17,7 +17,15 @@ export const layDanhSachPhongVe = (maLichChieu) => async (dispatch) => {
 
 export const datVeAction = (objectDatVe, history) => async (dispatch) => {
   try {
-    const res = await api.post("/QuanLyDatVe/DatVe", objectDatVe);
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    console.log(userInfo);
+    let token;
+    if (userInfo) {
+      token = userInfo.accessToken;
+    }
+    const res = await api.post("/QuanLyDatVe/DatVe", objectDatVe, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     if (res) {
       swal({
         title: "Đặt vé Thành Công!",
