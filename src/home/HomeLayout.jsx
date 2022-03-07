@@ -14,6 +14,7 @@ export const handleGoToView = (view) => {
   }
 };
 function HomeLayout({ children, hideDangNhap, fullOptionsHeader }) {
+  console.log("asd")
   return (
     <div
       style={{
